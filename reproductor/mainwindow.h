@@ -14,6 +14,7 @@
 #include <QMenu>
 #include <QAction>
 #include <QMessageBox>
+#include <QInputDialog>
 
 class MainWindow : public QMainWindow
 {
@@ -38,17 +39,20 @@ private:
 
     QWidget* centralWidget;
     QMenuBar* menu;
-    QMenu* mainMenu;
+    QMenu* archivo_;
+    QMenu* ver_;
     QMenu* menu1;
     QMenu* menu2;
     QMenu* subMenu1;
     QMenu* subMenu2 ;
+    QAction* actAbrir;
     QAction* action;
+    QAction* actStr;
     QAction* action2;
     QAction* action3;
     QMenu* menu3;
     QAction* action4;
-
+    QInputDialog* inputdial1;
 
 private slots:  // forma de qt de gestionar los eventos en la interfaz
     void onOpen();
@@ -58,6 +62,7 @@ private slots:  // forma de qt de gestionar los eventos en la interfaz
     void onVolumeChanged(int volume);
     void slotAbout();
     void onPantallaCompleta();
+    void abrirStrDial();
 };
 
 #endif // MAINWINDOW_H

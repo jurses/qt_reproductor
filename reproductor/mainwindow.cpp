@@ -12,26 +12,30 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //...
     centralWidget = new QWidget();
-    menu  = new QMenuBar(centralWidget);
-    mainMenu = new QMenu("Menu with Submenus");
+    menu  = new QMenuBar(this);
+    archivo_ = new QMenu("Archivo");
+    ver_ = new QMenu("Ver");
     menu1 	  = new QMenu("Menu 1");
     menu2 	  = new QMenu("Menu 2");
     menu3 = new QMenu("Menu3");
     subMenu1 = new QMenu("Submenu 1");
     subMenu2 = new QMenu("Submenu 2");
 
-    mainMenu->addMenu(menu1);
-    mainMenu->addMenu(menu2);
-    mainMenu->addMenu(menu3);
+    archivo_->addMenu(menu1);
+    archivo_->addMenu(menu2);
+    archivo_->addMenu(menu3);
 
     menu1->addMenu(subMenu1);
     menu2->addMenu(subMenu2);
 
-    menu->addMenu(mainMenu);
+    menu->addMenu(archivo_);
+    menu->addMenu(ver_);
     action  = menu1->addAction("About");
+    actAbrir = archivo_->addAction("Abrir archivo");
     action2 = subMenu1->addAction("Submenu 1 Action");
     action3 = subMenu2->addAction("Submenu 2 Action");
-    action4 = subMenu2->addAction("Pantalla completa");
+    action4 = ver_->addAction("Pantalla completa");
+    actStr = archivo_->addAction("Abrir stream");
     //Initialize widgets
     mediaPlayer_  = new QMediaPlayer(this);
     playerSlider_ = new QSlider(Qt::Horizontal, this);
@@ -78,6 +82,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(action2,        SIGNAL(triggered()),             this,          SLOT(slotAbout()));
     connect(action3,        SIGNAL(triggered()),             this,          SLOT(slotAbout()));
     connect(action4,        SIGNAL(triggered()),            this,           SLOT(onPantallaCompleta()));
+    connect(actAbrir,       SIGNAL(triggered()),            this,         SLOT(onOpen()));
+    connect(actStr,       SIGNAL(triggered()),            this,         SLOT(abrirStrDial()));
 }
 
 MainWindow::~MainWindow()
@@ -120,7 +126,11 @@ void MainWindow::onVolumeChanged(int volume)
     mediaPlayer_->setVolume(volume);
 }
 
+void MainWindow::abrirStrDial(){
+    QString stream = inputdial1->getText(this,"Url del streaming", "stream");
+    mediaPlayer_->setMedia(QUrl(stream));
+}
+
 void MainWindow::onPantallaCompleta() {
     this->setWindowState(Qt::WindowFullScreen);
-
 }
