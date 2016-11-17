@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
 {
@@ -9,6 +10,28 @@ MainWindow::MainWindow(QWidget *parent) :
     wgtMain_->setLayout(lytMain_);
     setCentralWidget(wgtMain_);
 
+    //...
+    centralWidget = new QWidget();
+    menu  = new QMenuBar(centralWidget);
+    mainMenu = new QMenu("Menu with Submenus");
+    menu1 	  = new QMenu("Menu 1");
+    menu2 	  = new QMenu("Menu 2");
+    menu3 = new QMenu("Menu3");
+    subMenu1 = new QMenu("Submenu 1");
+    subMenu2 = new QMenu("Submenu 2");
+
+    mainMenu->addMenu(menu1);
+    mainMenu->addMenu(menu2);
+    mainMenu->addMenu(menu3);
+
+    menu1->addMenu(subMenu1);
+    menu2->addMenu(subMenu2);
+
+    menu->addMenu(mainMenu);
+    action  = menu1->addAction("About");
+    action2 = subMenu1->addAction("Submenu 1 Action");
+    action3 = subMenu2->addAction("Submenu 2 Action");
+    action4 = subMenu2->addAction("Pantalla completa");
     //Initialize widgets
     mediaPlayer_  = new QMediaPlayer(this);
     playerSlider_ = new QSlider(Qt::Horizontal, this);
@@ -28,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
     volumeSlider_->setSliderPosition(100);
 
     //Populate grid layout
-    lytMain_->addWidget(videoWidget_,  0, 0, 1, 5);
+    lytMain_->addWidget(videoWidget_,  0, 0, 1, 5); // fila columna, numero de filas, numero de columnas
     lytMain_->addWidget(playerSlider_, 1, 0, 1, 5);
     lytMain_->addWidget(btnOpen_,      2, 0, 1, 1);
     lytMain_->addWidget(btnPlay_,      2, 1, 1, 1);
@@ -51,6 +74,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(mediaPlayer_,  SIGNAL(durationChanged(qint64)), this,         SLOT(onDurationChanged(qint64)));
     connect(mediaPlayer_,  SIGNAL(positionChanged(qint64)), this,         SLOT(onPositionChanged(qint64)));
     connect(volumeSlider_, SIGNAL(sliderMoved(int)),        this,         SLOT(onVolumeChanged(int)));
+    connect(action,         SIGNAL(triggered()),            this,         SLOT(slotAbout()));
+    connect(action2,        SIGNAL(triggered()),             this,          SLOT(slotAbout()));
+    connect(action3,        SIGNAL(triggered()),             this,          SLOT(slotAbout()));
+    connect(action4,        SIGNAL(triggered()),            this,           SLOT(onPantallaCompleta()));
 }
 
 MainWindow::~MainWindow()
@@ -73,6 +100,11 @@ void MainWindow::onSeek()
     mediaPlayer_->setPosition(playerSlider_->sliderPosition());
 }
 
+void MainWindow::slotAbout()
+{
+  QMessageBox::about(this,"About","This is an about box \n shown with QAction of QMenu.");
+}
+
 void MainWindow::onDurationChanged(qint64 duration)
 {
     playerSlider_->setRange(0, duration);
@@ -86,4 +118,9 @@ void MainWindow::onPositionChanged(qint64 position)
 void MainWindow::onVolumeChanged(int volume)
 {
     mediaPlayer_->setVolume(volume);
+}
+
+void MainWindow::onPantallaCompleta() {
+    this->setWindowState(Qt::WindowFullScreen);
+
 }

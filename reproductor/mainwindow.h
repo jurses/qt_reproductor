@@ -10,6 +10,10 @@
 #include <QSlider>
 #include <QFileDialog>
 #include <QToolButton>
+#include <QMenuBar>
+#include <QMenu>
+#include <QAction>
+#include <QMessageBox>
 
 class MainWindow : public QMainWindow
 {
@@ -20,24 +24,40 @@ public:
     ~MainWindow();
     
 private:
-    QGridLayout*        lytMain_;
-    QWidget*            wgtMain_;
-    QMediaPlayer*       mediaPlayer_;
-    QSlider*            playerSlider_;
-    QVideoWidget*       videoWidget_;
-    QSlider*            volumeSlider_;
-    QToolButton*        btnOpen_;
+    QGridLayout*        lytMain_;   //organizador por filas y columnas?
+    QWidget*            wgtMain_;   //
+    QMediaPlayer*       mediaPlayer_;   // permite trabajar con multimedia
+    QSlider*            playerSlider_;  // el deslizador
+    QVideoWidget*       videoWidget_;   // el mismo que QMediaPlayer pero para vídeo
+    QSlider*            volumeSlider_;  // el deslizador del volumen
+    QToolButton*        btnOpen_;   // botones...
     QToolButton*        btnPlay_;
     QToolButton*        btnPause_;
     QToolButton*        btnStop_;
+    QToolButton*        btnarchivo_;    // el botón del archivo
 
-private slots:
+    QWidget* centralWidget;
+    QMenuBar* menu;
+    QMenu* mainMenu;
+    QMenu* menu1;
+    QMenu* menu2;
+    QMenu* subMenu1;
+    QMenu* subMenu2 ;
+    QAction* action;
+    QAction* action2;
+    QAction* action3;
+    QMenu* menu3;
+    QAction* action4;
+
+
+private slots:  // forma de qt de gestionar los eventos en la interfaz
     void onOpen();
     void onSeek();
-    void onDurationChanged(qint64 duration);
+    void onDurationChanged(qint64 duration);    // quint64 un super entero
     void onPositionChanged(qint64 position);
     void onVolumeChanged(int volume);
-
+    void slotAbout();
+    void onPantallaCompleta();
 };
 
 #endif // MAINWINDOW_H

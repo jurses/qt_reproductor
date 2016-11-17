@@ -1,15 +1,13 @@
 /****************************************************************************
 ** Resource object code
 **
-** Created by: The Resource Compiler for Qt version 5.2.0
+** Created by: The Resource Compiler for Qt version 5.7.0
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include <QtCore/qglobal.h>
-
 static const unsigned char qt_resource_data[] = {
-  // /home/elias/Proyectos/curso-qt-osl/curso-qt-osl-reproductor/reproductor/resources/eject.png
+  // /home/jurses/Programas/curso/Qt_CodigoBase_Reproductor/reproductor/resources/eject.png
   0x0,0x0,0x7,0x9b,
   0x89,
   0x50,0x4e,0x47,0xd,0xa,0x1a,0xa,0x0,0x0,0x0,0xd,0x49,0x48,0x44,0x52,0x0,
@@ -134,7 +132,7 @@ static const unsigned char qt_resource_data[] = {
   0x5d,0xc6,0x3d,0xce,0x9,0x4a,0xe8,0xb6,0x12,0x5d,0x26,0x31,0x61,0xee,0x71,0xce,
   0xb1,0xea,0x4a,0xde,0xdf,0x1,0x17,0xb9,0xe4,0xb6,0x2d,0xb,0x2e,0xc,0x0,0x0,
   0x0,0x0,0x49,0x45,0x4e,0x44,0xae,0x42,0x60,0x82,
-    // /home/elias/Proyectos/curso-qt-osl/curso-qt-osl-reproductor/reproductor/resources/stop.png
+    // /home/jurses/Programas/curso/Qt_CodigoBase_Reproductor/reproductor/resources/stop.png
   0x0,0x0,0x7,0x63,
   0x89,
   0x50,0x4e,0x47,0xd,0xa,0x1a,0xa,0x0,0x0,0x0,0xd,0x49,0x48,0x44,0x52,0x0,
@@ -256,7 +254,7 @@ static const unsigned char qt_resource_data[] = {
   0xea,0xec,0x32,0x83,0x69,0xf1,0xaf,0x73,0xe,0x35,0xb1,0x46,0xf9,0x1b,0xf7,0x82,
   0xd8,0x72,0x5d,0xe0,0x36,0xb0,0x0,0x0,0x0,0x0,0x49,0x45,0x4e,0x44,0xae,0x42,
   0x60,0x82,
-    // /home/elias/Proyectos/curso-qt-osl/curso-qt-osl-reproductor/reproductor/resources/play.png
+    // /home/jurses/Programas/curso/Qt_CodigoBase_Reproductor/reproductor/resources/play.png
   0x0,0x0,0x7,0x8c,
   0x89,
   0x50,0x4e,0x47,0xd,0xa,0x1a,0xa,0x0,0x0,0x0,0xd,0x49,0x48,0x44,0x52,0x0,
@@ -380,7 +378,7 @@ static const unsigned char qt_resource_data[] = {
   0xc,0x69,0x94,0xb1,0xd7,0x39,0x5e,0x11,0x1d,0x52,0xa4,0xcb,0x38,0xc6,0xc4,0x5e,
   0xe7,0xec,0x2c,0x2f,0xe6,0xfd,0xf,0x67,0xf3,0xcf,0x7a,0xd8,0x2a,0x61,0x9b,0x0,
   0x0,0x0,0x0,0x49,0x45,0x4e,0x44,0xae,0x42,0x60,0x82,
-    // /home/elias/Proyectos/curso-qt-osl/curso-qt-osl-reproductor/reproductor/resources/pause.png
+    // /home/jurses/Programas/curso/Qt_CodigoBase_Reproductor/reproductor/resources/pause.png
   0x0,0x0,0x7,0x49,
   0x89,
   0x50,0x4e,0x47,0xd,0xa,0x1a,0xa,0x0,0x0,0x0,0xd,0x49,0x48,0x44,0x52,0x0,
@@ -555,32 +553,49 @@ static const unsigned char qt_resource_struct[] = {
 
 };
 
-QT_BEGIN_NAMESPACE
+#ifdef QT_NAMESPACE
+#  define QT_RCC_PREPEND_NAMESPACE(name) ::QT_NAMESPACE::name
+#  define QT_RCC_MANGLE_NAMESPACE0(x) x
+#  define QT_RCC_MANGLE_NAMESPACE1(a, b) a##_##b
+#  define QT_RCC_MANGLE_NAMESPACE2(a, b) QT_RCC_MANGLE_NAMESPACE1(a,b)
+#  define QT_RCC_MANGLE_NAMESPACE(name) QT_RCC_MANGLE_NAMESPACE2( \
+        QT_RCC_MANGLE_NAMESPACE0(name), QT_RCC_MANGLE_NAMESPACE0(QT_NAMESPACE))
+#else
+#   define QT_RCC_PREPEND_NAMESPACE(name) name
+#   define QT_RCC_MANGLE_NAMESPACE(name) name
+#endif
 
-extern Q_CORE_EXPORT bool qRegisterResourceData
-    (int, const unsigned char *, const unsigned char *, const unsigned char *);
+#ifdef QT_NAMESPACE
+namespace QT_NAMESPACE {
+#endif
 
-extern Q_CORE_EXPORT bool qUnregisterResourceData
-    (int, const unsigned char *, const unsigned char *, const unsigned char *);
+bool qRegisterResourceData(int, const unsigned char *, const unsigned char *, const unsigned char *);
 
-QT_END_NAMESPACE
+bool qUnregisterResourceData(int, const unsigned char *, const unsigned char *, const unsigned char *);
 
+#ifdef QT_NAMESPACE
+}
+#endif
 
-int QT_MANGLE_NAMESPACE(qInitResources_resources)()
+int QT_RCC_MANGLE_NAMESPACE(qInitResources_resources)();
+int QT_RCC_MANGLE_NAMESPACE(qInitResources_resources)()
 {
-    QT_PREPEND_NAMESPACE(qRegisterResourceData)
+    QT_RCC_PREPEND_NAMESPACE(qRegisterResourceData)
         (0x01, qt_resource_struct, qt_resource_name, qt_resource_data);
     return 1;
 }
 
-Q_CONSTRUCTOR_FUNCTION(QT_MANGLE_NAMESPACE(qInitResources_resources))
-
-int QT_MANGLE_NAMESPACE(qCleanupResources_resources)()
+int QT_RCC_MANGLE_NAMESPACE(qCleanupResources_resources)();
+int QT_RCC_MANGLE_NAMESPACE(qCleanupResources_resources)()
 {
-    QT_PREPEND_NAMESPACE(qUnregisterResourceData)
+    QT_RCC_PREPEND_NAMESPACE(qUnregisterResourceData)
        (0x01, qt_resource_struct, qt_resource_name, qt_resource_data);
     return 1;
 }
 
-Q_DESTRUCTOR_FUNCTION(QT_MANGLE_NAMESPACE(qCleanupResources_resources))
-
+namespace {
+   struct initializer {
+       initializer() { QT_RCC_MANGLE_NAMESPACE(qInitResources_resources)(); }
+       ~initializer() { QT_RCC_MANGLE_NAMESPACE(qCleanupResources_resources)(); }
+   } dummy;
+}
